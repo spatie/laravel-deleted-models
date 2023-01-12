@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Spatie\DeletedRecordsKeeper\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class DeletedRecordsKeeperCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-deleted-records-keeper';
 
     public $description = 'My command';
 
