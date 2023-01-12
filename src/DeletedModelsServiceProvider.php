@@ -2,7 +2,6 @@
 
 namespace Spatie\DeletedModels;
 
-use Spatie\DeletedModels\Commands\DeletedModelsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
