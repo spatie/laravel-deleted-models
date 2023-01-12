@@ -2,6 +2,7 @@
 
 namespace Spatie\DeletedRecordsKeeper;
 
+use Spatie\DeletedRecordsKeeper\Commands\DeletedRecordsKeeperCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
