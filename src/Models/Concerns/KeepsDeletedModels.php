@@ -10,7 +10,7 @@ trait KeepsDeletedModels
 {
     public static function bootKeepsDeletedModels(): void
     {
-        static::deleted(function(Model $model) {
+        static::deleted(function (Model $model) {
             DeletedModel::create([
                 'key' => $model->getKey(),
                 'model' => $model->getMorphClass(),

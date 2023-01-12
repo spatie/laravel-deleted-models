@@ -14,8 +14,5 @@ class DeletedModel extends Model
 
     public function restore(): ?Model
     {
-
     }
-
-
 }
