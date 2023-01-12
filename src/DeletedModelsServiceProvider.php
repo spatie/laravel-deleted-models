@@ -1,17 +1,17 @@
 <?php
 
-namespace Spatie\DeletedRecordsKeeper;
+namespace Spatie\DeletedModels;
 
-use Spatie\DeletedRecordsKeeper\Commands\DeletedRecordsKeeperCommand;
+use Spatie\DeletedModels\Commands\DeletedModelsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class DeletedRecordsKeeperServiceProvider extends PackageServiceProvider
+class DeletedModelsServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-deleted-records-keeper')
+            ->name('laravel-deleted-models')
             ->hasConfigFile()
             ->hasMigration('create_deleted_models_table');
     }

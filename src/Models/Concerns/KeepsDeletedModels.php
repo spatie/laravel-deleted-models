@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\DeletedRecordsKeeper\Models\Concerns;
+namespace Spatie\DeletedModels\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\DeletedRecordsKeeper\Models\DeletedModel;
+use Spatie\DeletedModels\Models\DeletedModel;
 
 /** @mixin \Illuminate\Database\Eloquent\Model */
 trait KeepsDeletedModels

@@ -1,15 +1,15 @@
 # Automatically copy deleted records to a separate table
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-deleted-records-keeper.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-deleted-records-keeper)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-deleted-records-keeper/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/spatie/laravel-deleted-records-keeper/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-deleted-records-keeper/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/spatie/laravel-deleted-records-keeper/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-deleted-records-keeper.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-deleted-records-keeper)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-deleted-models.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-deleted-models)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-deleted-models/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/spatie/laravel-deleted-models/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-deleted-models/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/spatie/laravel-deleted-models/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-deleted-models.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-deleted-models)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-deleted-records-keeper.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-deleted-records-keeper)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-deleted-models.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-deleted-models)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
@@ -20,20 +20,20 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require spatie/laravel-deleted-records-keeper
+composer require spatie/laravel-deleted-models
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-deleted-records-keeper-migrations"
+php artisan vendor:publish --tag="laravel-deleted-models-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-deleted-records-keeper-config"
+php artisan vendor:publish --tag="laravel-deleted-models-config"
 ```
 
 This is the contents of the published config file:
@@ -46,13 +46,13 @@ return [
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="laravel-deleted-records-keeper-views"
+php artisan vendor:publish --tag="laravel-deleted-models-views"
 ```
 
 ## Usage
 
 ```php
-$deletedRecordsKeeper = new Spatie\DeletedRecordsKeeper();
+$deletedRecordsKeeper = new Spatie\DeletedModels();
 echo $deletedRecordsKeeper->echoPhrase('Hello, Spatie!');
 ```
 

@@ -1,5 +1,5 @@
 <?php
 
-use Spatie\DeletedRecordsKeeper\Tests\TestCase;
+use Spatie\DeletedModels\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

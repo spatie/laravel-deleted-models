@@ -1,12 +1,12 @@
 {
-    "name": "spatie/laravel-deleted-records-keeper",
+    "name": "spatie/laravel-deleted-models",
     "description": "Automatically copy deleted records to a separate table",
     "keywords": [
         "spatie",
         "laravel",
-        "laravel-deleted-records-keeper"
+        "laravel-deleted-models"
     ],
-    "homepage": "https://github.com/spatie/laravel-deleted-records-keeper",
+    "homepage": "https://github.com/spatie/laravel-deleted-models",
     "license": "MIT",
     "authors": [
         {
@@ -36,13 +36,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\DeletedRecordsKeeper\\": "src",
-            "Spatie\\DeletedRecordsKeeper\\Database\\Factories\\": "database/factories"
+            "Spatie\\DeletedModels\\": "src",
+            "Spatie\\DeletedModels\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\DeletedRecordsKeeper\\Tests\\": "tests"
+            "Spatie\\DeletedModels\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -62,10 +62,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\DeletedRecordsKeeper\\DeletedRecordsKeeperServiceProvider"
+                "Spatie\\DeletedModels\\DeletedModelsServiceProvider"
             ],
             "aliases": {
-                "DeletedRecordsKeeper": "Spatie\\DeletedRecordsKeeper\\Facades\\DeletedRecordsKeeper"
+                "DeletedModels": "Spatie\\DeletedModels\\Facades\\DeletedModels"
             }
         }
     },

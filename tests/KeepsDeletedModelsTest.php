@@ -1,7 +1,7 @@
 <?php
 
-use Spatie\DeletedRecordsKeeper\Models\DeletedModel;
-use Spatie\DeletedRecordsKeeper\Tests\TestSupport\Models\TestModel;
+use Spatie\DeletedModels\Models\DeletedModel;
+use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
 use function Spatie\PestPluginTestTime\testTime;
 
 beforeEach(function() {
@@ -28,6 +28,4 @@ it('will copy a deleted model to the deleted models table', function() {
         ->name->toBe('John Doe')
         ->created_at->toBe('2023-01-01T00:00:00.000000Z')
         ->updated_at->toBe('2023-01-01T00:00:00.000000Z');
-
-
 });

@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\DeletedRecordsKeeper\Tests;
+namespace Spatie\DeletedModels\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\DeletedRecordsKeeper\DeletedRecordsKeeperServiceProvider;
+use Spatie\DeletedModels\DeletedModelsServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -15,14 +15,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Spatie\\DeletedRecordsKeeper\\Tests\\TestSupport\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Spatie\\DeletedModels\\Tests\\TestSupport\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            DeletedRecordsKeeperServiceProvider::class,
+            DeletedModelsServiceProvider::class,
         ];
     }
 

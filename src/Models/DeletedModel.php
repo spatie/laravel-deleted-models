@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\DeletedRecordsKeeper\Models;
+namespace Spatie\DeletedModels\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

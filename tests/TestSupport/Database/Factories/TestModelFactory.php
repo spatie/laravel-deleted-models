@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\DeletedRecordsKeeper\Tests\TestSupport\Database\Factories;
+namespace Spatie\DeletedModels\Tests\TestSupport\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Spatie\DeletedRecordsKeeper\Tests\TestSupport\Models\TestModel;
+use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
 
 class TestModelFactory extends Factory
 {
