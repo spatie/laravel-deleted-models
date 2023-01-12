@@ -8,10 +8,12 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('laravel_deleted_records_keeper_table', function (Blueprint $table) {
+        Schema::create('deleted_models', function (Blueprint $table) {
             $table->id();
 
-            // add fields
+            $table->integer('key');
+            $table->string('model');
+            $table->json('values');
 
             $table->timestamps();
         });
