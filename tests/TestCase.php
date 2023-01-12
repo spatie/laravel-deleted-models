@@ -33,7 +33,7 @@ class TestCase extends Orchestra
         $migration = include __DIR__.'/../database/migrations/create_deleted_models_table.php';
         $migration->up();
 
-        Schema::create('test_models', function(Blueprint $table) {
+        Schema::create('test_models', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
