@@ -53,7 +53,6 @@ class DeletedModel extends Model
 
     /**
      * @param  class-string<Model>  $modelClass
-     *
      * @return Model
      */
     protected function makeRestoredModel(string $modelClass): mixed
@@ -65,7 +64,6 @@ class DeletedModel extends Model
 
     public function beforeSavingRestoredModel(): void
     {
-
     }
 
     protected function persistRestoredModel(Model $model): void
@@ -75,7 +73,6 @@ class DeletedModel extends Model
 
     public function afterSavingRestoredModel(): void
     {
-
     }
 
     protected function deleteDeletedModel(): void
