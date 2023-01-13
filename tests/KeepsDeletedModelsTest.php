@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\DeletedModels\Models\DeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
@@ -82,8 +83,6 @@ it('can uses the morph map when restoring a model', function () {
 it('can be configured to not keep a deleted model', function() {
     $model = new class extends TestModel
     {
-        public $table = 'test_models';
-
         public function shouldKeep(): bool
         {
             return false;
@@ -97,4 +96,26 @@ it('can be configured to not keep a deleted model', function() {
     $model->delete();
 
     expect(DeletedModel::count())->toBe(0);
+});
+
+it('can determine the attributes to be stored', function() {
+    $model = new class extends TestModel
+    {
+        public function attributesToKeep(): array
+        {
+            return [
+                'name' => "{$this->name} suffix"
+            ];
+        }
+    };
+
+    $model
+        ->fill(['name' => 'John Doe'])
+        ->save();
+
+    $model->delete();
+
+    $deletedModel = DeletedModel::first();
+
+    expect($deletedModel->value('name'))->toBe('John Doe suffix');
 });

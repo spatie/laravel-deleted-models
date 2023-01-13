@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Arr;
 use Spatie\DeletedModels\Events\DeletedModelRestored;
 use Spatie\DeletedModels\Events\RestoringDeletedModel;
 use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
@@ -89,6 +90,11 @@ class DeletedModel extends Model
     protected function handleExceptionDuringRestore(Exception $exception)
     {
         throw CouldNotRestoreModel::make($this, $exception);
+    }
+
+    public function value(string $key = null): mixed
+    {
+        return Arr::get($this->values, $key);
     }
 
     protected function massPrunable()

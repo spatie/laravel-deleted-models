@@ -10,6 +10,8 @@ class TestModel extends Model
 {
     public $guarded = [];
 
+    public $table = 'test_models';
+
     use KeepsDeletedModels;
     use HasFactory;
 }
