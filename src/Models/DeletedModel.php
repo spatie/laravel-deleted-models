@@ -15,16 +15,45 @@ class DeletedModel extends Model
 
     public function restore(): ?Model
     {
-        /** @var class-string<Model> $modelClass */
-        $modelClass = Relation::getMorphedModel($this->model) ?? $this->model;
+        $modelClass = $this->getModelClass();
 
+        $restoredModel = $this->makeRestoredModel($modelClass);
+
+        $this->persistRestoredModel($restoredModel);
+
+        $this->deleteDeletedModel();
+
+        return $restoredModel;
+    }
+
+    /**
+     * @return class-string<Model>
+     */
+    protected function getModelClass(): string
+    {
+        return Relation::getMorphedModel($this->model) ?? $this->model;
+
+    }
+
+    /**
+     * @param class-string<Model> $modelClass
+     *
+     * @return Model
+     */
+    protected function makeRestoredModel(string $modelClass): mixed
+    {
         $model = (new $modelClass)
             ->fill($this->values);
-
-        $model->save();
-
-        $this->delete();
-
         return $model;
+    }
+
+    protected function persistRestoredModel(Model $model): void
+    {
+        $model->save();
+    }
+
+    protected function deleteDeletedModel(): void
+    {
+        $this->delete();
     }
 }
