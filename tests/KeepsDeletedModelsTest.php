@@ -8,12 +8,11 @@ use function Spatie\PestPluginTestTime\testTime;
 beforeEach(function () {
     testTime()->freeze('2023-01-01 00:00:00');
 
-    Relation::morphMap();
+    Relation::morphMap([], merge: false);
 
     $this->model = TestModel::factory()->create([
         'name' => 'John Doe',
     ]);
-
 });
 
 it('will copy a deleted model to the deleted models table', function () {

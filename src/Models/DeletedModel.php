@@ -3,12 +3,17 @@
 namespace Spatie\DeletedModels\Models;
 
 use Exception;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Spatie\DeletedModels\Events\DeletedModelRestored;
+use Spatie\DeletedModels\Events\RestoringDeletedModel;
 use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
 
 class DeletedModel extends Model
 {
+    use MassPrunable;
+
     public $casts = [
         'values' => 'array',
     ];
@@ -17,6 +22,8 @@ class DeletedModel extends Model
 
     public function restore(): ?Model
     {
+        event(new RestoringDeletedModel($this));
+
         $modelClass = $this->getModelClass();
 
         try {
@@ -28,6 +35,8 @@ class DeletedModel extends Model
         }
 
         $this->deleteDeletedModel();
+
+        event(new DeletedModelRestored($this, $restoredModel));
 
         return $restoredModel;
     }
@@ -64,5 +73,11 @@ class DeletedModel extends Model
     protected function handleExceptionDuringRestore(Exception $exception)
     {
         throw CouldNotRestoreModel::make($this, $exception);
+    }
+
+    protected function massPrunable()
+    {
+        return static::where('created_at', '<=', config('deleted-models.prune_after_days'));
+
     }
 }

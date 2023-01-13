@@ -17,7 +17,10 @@ trait KeepsDeletedModels
                 return;
             }
 
-            DeletedModel::create([
+            /** @var class-string<DeletedModel> $deletedModelClass */
+            $deletedModelClass = config('deleted-models.model');
+
+            $deletedModelClass::create([
                 'key' => $model->getKey(),
                 'model' => $model->getMorphClass(),
                 'values' => $model->prepareForKeeping(),
