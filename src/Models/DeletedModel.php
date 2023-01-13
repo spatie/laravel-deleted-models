@@ -27,7 +27,6 @@ class DeletedModel extends Model
             $this->handleExceptionDuringRestore($exception);
         }
 
-
         $this->deleteDeletedModel();
 
         return $restoredModel;
@@ -39,12 +38,10 @@ class DeletedModel extends Model
     protected function getModelClass(): string
     {
         return Relation::getMorphedModel($this->model) ?? $this->model;
-
     }
 
     /**
-     * @param class-string<Model> $modelClass
-     *
+     * @param  class-string<Model>  $modelClass
      * @return Model
      */
     protected function makeRestoredModel(string $modelClass): mixed
