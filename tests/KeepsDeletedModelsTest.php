@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\DeletedModels\Models\DeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
@@ -98,13 +97,13 @@ it('can be configured to not keep a deleted model', function () {
     expect(DeletedModel::count())->toBe(0);
 });
 
-it('can determine the attributes to be stored', function() {
+it('can determine the attributes to be stored', function () {
     $model = new class extends TestModel
     {
         public function attributesToKeep(): array
         {
             return [
-                'name' => "{$this->name} suffix"
+                'name' => "{$this->name} suffix",
             ];
         }
     };
