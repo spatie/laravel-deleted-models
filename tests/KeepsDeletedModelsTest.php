@@ -13,7 +13,6 @@ beforeEach(function () {
     ]);
 
     Relation::morphMap();
-
 });
 
 it('will copy a deleted model to the deleted models table', function () {
@@ -34,13 +33,13 @@ it('will copy a deleted model to the deleted models table', function () {
         ->updated_at->toBe('2023-01-01T00:00:00.000000Z');
 });
 
-it('can delete a model without keeping it', function() {
+it('can delete a model without keeping it', function () {
     $this->model->deleteWithoutKeeping();
 
     expect(DeletedModel::count())->toBe(0);
 });
 
-it('uses the morph map to determine the model', function() {
+it('uses the morph map to determine the model', function () {
     Relation::morphMap([
         'test' => TestModel::class,
     ]);
@@ -50,7 +49,7 @@ it('uses the morph map to determine the model', function() {
     expect(DeletedModel::first()->model)->toBe('test');
 });
 
-it('can restore a deleted model', function() {
+it('can restore a deleted model', function () {
     $this->model->delete();
 
     expect(TestModel::count())->toBe(0);
@@ -68,7 +67,7 @@ it('can restore a deleted model', function() {
         ->updated_at->format('Y-m-d H:i:s')->toBe('2023-01-01 00:00:00');
 });
 
-it('can uses the morph map when restoring a model', function() {
+it('can uses the morph map when restoring a model', function () {
     Relation::morphMap([
         'test' => TestModel::class,
     ]);

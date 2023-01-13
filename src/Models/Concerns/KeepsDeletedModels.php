@@ -30,15 +30,13 @@ trait KeepsDeletedModels
         return $this->toArray();
     }
 
-
-
     public function deleteWithoutKeeping()
     {
         $this->shouldKeep = false;
 
         $this->delete();
 
-        return tap($this->delete(), function() {
+        return tap($this->delete(), function () {
             $this->shouldKeep = true;
         });
     }
