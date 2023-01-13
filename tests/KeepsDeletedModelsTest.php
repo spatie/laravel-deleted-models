@@ -13,7 +13,6 @@ beforeEach(function () {
     $this->model = TestModel::factory()->create([
         'name' => 'John Doe',
     ]);
-
 });
 
 it('will copy a deleted model to the deleted models table', function () {
