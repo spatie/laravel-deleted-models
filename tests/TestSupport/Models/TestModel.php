@@ -8,6 +8,8 @@ use Spatie\DeletedModels\Models\Concerns\KeepsDeletedModels;
 
 class TestModel extends Model
 {
+    public $guarded = [];
+
     use KeepsDeletedModels;
     use HasFactory;
 }
