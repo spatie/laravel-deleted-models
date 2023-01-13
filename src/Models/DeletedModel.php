@@ -2,8 +2,10 @@
 
 namespace Spatie\DeletedModels\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
 
 class DeletedModel extends Model
 {
@@ -17,9 +19,14 @@ class DeletedModel extends Model
     {
         $modelClass = $this->getModelClass();
 
-        $restoredModel = $this->makeRestoredModel($modelClass);
+        try {
+            $restoredModel = $this->makeRestoredModel($modelClass);
 
-        $this->persistRestoredModel($restoredModel);
+            $this->persistRestoredModel($restoredModel);
+        } catch (Exception $exception) {
+            $this->handleExceptionDuringRestore($exception);
+        }
+
 
         $this->deleteDeletedModel();
 
@@ -42,8 +49,8 @@ class DeletedModel extends Model
      */
     protected function makeRestoredModel(string $modelClass): mixed
     {
-        $model = (new $modelClass)
-            ->fill($this->values);
+        $model = (new $modelClass)->fill($this->values);
+
         return $model;
     }
 
@@ -55,5 +62,10 @@ class DeletedModel extends Model
     protected function deleteDeletedModel(): void
     {
         $this->delete();
+    }
+
+    protected function handleExceptionDuringRestore(Exception $exception)
+    {
+        throw CouldNotRestoreModel::make($this, $exception);
     }
 }
