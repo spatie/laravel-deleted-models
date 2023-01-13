@@ -19,7 +19,7 @@ trait KeepsDeletedModels
                 return;
             }
 
-            if (! $this->shouldKeep()) {
+            if (! $model->shouldKeep()) {
                 return;
             }
 
@@ -29,12 +29,12 @@ trait KeepsDeletedModels
             $deletedModelClass::create([
                 'key' => $model->getKey(),
                 'model' => $model->getMorphClass(),
-                'values' => $model->prepareForKeeping(),
+                'values' => $model->attributesToKeep(),
             ]);
         });
     }
 
-    public function shouldBeKept(): bool
+    public function shouldKeep(): bool
     {
         return true;
     }
