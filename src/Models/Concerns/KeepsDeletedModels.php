@@ -2,7 +2,9 @@
 
 namespace Spatie\DeletedModels\Models\Concerns;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\DeletedModels\Exceptions\NoModelFoundToRestore;
 use Spatie\DeletedModels\Models\DeletedModel;
 
 /** @mixin \Illuminate\Database\Eloquent\Model */
@@ -17,6 +19,10 @@ trait KeepsDeletedModels
                 return;
             }
 
+            if (! $this->shouldKeep()) {
+                return;
+            }
+
             /** @var class-string<DeletedModel> $deletedModelClass */
             $deletedModelClass = config('deleted-models.model');
 
@@ -28,10 +34,16 @@ trait KeepsDeletedModels
         });
     }
 
-    public function prepareForKeeping(): array
+    public function shouldBeKept(): bool
+    {
+        return true;
+    }
+
+    public function attributesToKeep(): array
     {
         return $this->toArray();
     }
+
 
     public function deleteWithoutKeeping()
     {
@@ -40,5 +52,49 @@ trait KeepsDeletedModels
         $this->delete();
 
         return tap($this->delete(), fn () => $this->shouldKeep = true);
+    }
+
+    public static function deletedModels(): Builder
+    {
+        $model = (new self)->getMorphClass();
+
+        return DeletedModel::query()->where('model', $model);
+    }
+
+    public static function restore(mixed $key): Model
+    {
+        $deletedModel = self::findDeletedModelToRestore($key);
+
+        self::beforeRestoringModel($deletedModel);
+
+        $restoredModel = $deletedModel->restore();
+
+        self::afterRestoringModel($restoredModel, $deletedModel);
+
+        return $restoredModel;
+    }
+
+    public static function beforeRestoringModel(DeletedModel $deletedModel): void
+    {
+
+    }
+
+    public static function afterRestoringModel(
+        Model $restoredMode,
+        DeletedModel $deletedModel
+    ): void
+    {
+
+    }
+
+    protected static function findDeletedModelToRestore(mixed $key): DeletedModel
+    {
+        $deletedModel = static::deletedModels()->where('key', $key)->first();
+
+        if (! $deletedModel) {
+            throw NoModelFoundToRestore::make(static::class, $key);
+        }
+
+        return $deletedModel;
     }
 }

@@ -11,5 +11,5 @@ return [
      *
      * This functionality uses Laravel's native pruning feature.
      */
-    'prune_after_days' => 365
+    'prune_after_days' => 365,
 ];
