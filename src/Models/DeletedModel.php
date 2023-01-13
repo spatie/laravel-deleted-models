@@ -10,6 +10,10 @@ use Spatie\DeletedModels\Events\DeletedModelRestored;
 use Spatie\DeletedModels\Events\RestoringDeletedModel;
 use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
 
+/**
+ * @property string $model
+ * @property array $values
+ */
 class DeletedModel extends Model
 {
     use MassPrunable;
@@ -36,6 +40,8 @@ class DeletedModel extends Model
             $this->afterSavingRestoredModel();
         } catch (Exception $exception) {
             $this->handleExceptionDuringRestore($exception);
+
+            throw $exception;
         }
 
         $this->deleteDeletedModel();
