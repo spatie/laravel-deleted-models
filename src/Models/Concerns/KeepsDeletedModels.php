@@ -36,8 +36,6 @@ trait KeepsDeletedModels
 
         $this->delete();
 
-        return tap($this->delete(), function () {
-            $this->shouldKeep = true;
-        });
+        return tap($this->delete(), fn() => $this->shouldKeep = true);
     }
 }
