@@ -9,6 +9,5 @@ class DeletedModelRestored
 {
     public function __construct(public DeletedModel $deletedModel, public Model $restoredModel)
     {
-
     }
 }

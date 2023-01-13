@@ -44,7 +44,6 @@ trait KeepsDeletedModels
         return $this->toArray();
     }
 
-
     public function deleteWithoutKeeping()
     {
         $this->shouldKeep = false;
@@ -76,15 +75,12 @@ trait KeepsDeletedModels
 
     public static function beforeRestoringModel(DeletedModel $deletedModel): void
     {
-
     }
 
     public static function afterRestoringModel(
         Model $restoredMode,
         DeletedModel $deletedModel
-    ): void
-    {
-
+    ): void {
     }
 
     protected static function findDeletedModelToRestore(mixed $key): DeletedModel
