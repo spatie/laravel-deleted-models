@@ -78,3 +78,23 @@ it('can uses the morph map when restoring a model', function () {
 
     expect(TestModel::first()->name)->toBe('John Doe');
 });
+
+it('can be configured to not keep a deleted model', function() {
+    $model = new class extends TestModel
+    {
+        public $table = 'test_models';
+
+        public function shouldKeep(): bool
+        {
+            return false;
+        }
+    };
+
+    $model
+        ->fill(['name' => 'John Doe'])
+        ->save();
+
+    $model->delete();
+
+    expect(DeletedModel::count())->toBe(0);
+});
