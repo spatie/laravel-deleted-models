@@ -13,6 +13,7 @@ class TestModelFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'secret' => $this->faker->password,
         ];
     }
 }

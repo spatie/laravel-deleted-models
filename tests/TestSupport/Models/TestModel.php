@@ -10,6 +10,10 @@ class TestModel extends Model
 {
     public $guarded = [];
 
+    public $hidden = [
+        'secret',
+    ];
+
     public $table = 'test_models';
 
     use KeepsDeletedModels;

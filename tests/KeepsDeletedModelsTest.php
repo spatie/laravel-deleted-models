@@ -12,9 +12,12 @@ beforeEach(function () {
 
     Relation::morphMap([], merge: false);
 
-    $this->model = TestModel::factory()->create([
+    $this->attributes = [
         'name' => 'John Doe',
-    ]);
+        'secret' => 'hash',
+    ];
+
+    $this->model = TestModel::factory()->create($this->attributes);
 });
 
 it('will copy a deleted model to the deleted models table', function () {
@@ -65,6 +68,7 @@ it('can restore a deleted model', function () {
     expect($restoredModel)
         ->id->toBe(1)
         ->name->toBe('John Doe')
+        ->secret->toBe('hash')
         ->created_at->format('Y-m-d H:i:s')->toBe('2023-01-01 00:00:00')
         ->updated_at->format('Y-m-d H:i:s')->toBe('2023-01-01 00:00:00');
 });
@@ -91,7 +95,7 @@ it('can be configured to not keep a deleted model', function () {
     };
 
     $model
-        ->fill(['name' => 'John Doe'])
+        ->fill($this->attributes)
         ->save();
 
     $model->delete();
@@ -111,7 +115,7 @@ it('can determine the attributes to be stored', function () {
     };
 
     $model
-        ->fill(['name' => 'John Doe'])
+        ->fill($this->attributes)
         ->save();
 
     $model->delete();
@@ -135,3 +139,15 @@ it('will throw an exception when the model cannot be restored', function () {
 
     TestModel::restore($id);
 })->throws(CouldNotRestoreModel::class);
+
+it('will save hidden attributes as well', function () {
+    $this->model->delete();
+
+    expect(DeletedModel::count())->toBe(1);
+
+    $deletedModel = DeletedModel::first();
+
+    expect($deletedModel->values)
+        ->id->toBe(1)
+        ->secret->toBe('hash');
+});
