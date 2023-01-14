@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
 use Spatie\DeletedModels\Exceptions\NoModelFoundToRestore;
 use Spatie\DeletedModels\Models\DeletedModel;
+use Spatie\DeletedModels\Tests\TestSupport\Models\RelatedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
 use function Spatie\PestPluginTestTime\testTime;
 
@@ -171,4 +172,18 @@ it('will return null when making a non-existing model', function () {
     $testModel = TestModel::makeRestored('non-existing-key');
 
     expect($testModel)->toBeNull();
+});
+
+it('will not save relationship objects', function () {
+    RelatedModel::factory()->for($this->model)->create();
+
+    $this->model->load('relatedModel');
+
+    $this->model->delete();
+
+    expect(DeletedModel::count())->toBe(1);
+
+    $deletedModel = DeletedModel::first();
+
+    expect($deletedModel->values)->not()->toHaveKey('related_model');
 });

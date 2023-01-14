@@ -39,5 +39,17 @@ class TestCase extends Orchestra
             $table->string('secret');
             $table->timestamps();
         });
+
+        Schema::create('related_models', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('test_model_id');
+            $table->string('name');
+            $table->timestamps();
+
+            $table->foreign('test_model_id')
+                ->references('id')
+                ->on('test_models')
+                ->onDelete('cascade');
+        });
     }
 }
