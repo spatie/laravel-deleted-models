@@ -125,12 +125,12 @@ it('will throw an exception when trying to restore a not-existing model', functi
     TestModel::restore('non-existing');
 })->throws(NoModelFoundToRestore::class);
 
-it('will throw an exception when the model cannot be restored', function() {
+it('will throw an exception when the model cannot be restored', function () {
     $id = $this->model->id;
 
     $this->model->delete();
 
-     // sneakily change the deleted model so it cannot be restored
+    // sneakily change the deleted model so it cannot be restored
     DeletedModel::first()->update(['values' => []]);
 
     TestModel::restore($id);
