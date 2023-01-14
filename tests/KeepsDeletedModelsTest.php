@@ -121,7 +121,7 @@ it('can determine the attributes to be stored', function () {
     expect($deletedModel->value('name'))->toBe('John Doe suffix');
 });
 
-it('will throw an exception when trying to restore a not-existing model', function() {
+it('will throw an exception when trying to restore a not-existing model', function () {
     TestModel::restore('non-existing');
 })->throws(NoModelFoundToRestore::class);
 
