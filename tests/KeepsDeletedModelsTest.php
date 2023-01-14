@@ -6,7 +6,6 @@ use Spatie\DeletedModels\Exceptions\NoModelFoundToRestore;
 use Spatie\DeletedModels\Models\DeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
 use function Spatie\PestPluginTestTime\testTime;
-use Illuminate\Support\Facades\Event;
 
 beforeEach(function () {
     testTime()->freeze('2023-01-01 00:00:00');
@@ -166,7 +165,7 @@ it('can make a restored model without saving it', function () {
     expect($testModel->exists)->toBe(false);
 });
 
-it('will return null when making a non-existing model', function() {
+it('will return null when making a non-existing model', function () {
     $this->model->delete();
 
     $testModel = TestModel::makeRestored('non-existing-key');

@@ -52,7 +52,7 @@ class DeletedModel extends Model
 
     public function restoreQuietly(): Model
     {
-        return self::withoutEvents(fn() => $this->restore());
+        return self::withoutEvents(fn () => $this->restore());
     }
 
     /** @return class-string<Model> */
