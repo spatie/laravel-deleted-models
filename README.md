@@ -104,6 +104,8 @@ To restore a previous model you can call `restore` and pass the id.
 $blogPost = Blogpost::restore(5); // $blogPost will be restored and returned
 ```
 
+If the model to be restored can't be found in the `deleted_models` table, a `Spatie\DeletedModels\Exceptions\NoModelFoundToRestore` exception will be thrown.
+
 ### Restoring without saving
 
 To restore in memory, without actually saving it, you can call `makeRestored`.
@@ -116,11 +118,13 @@ $blogPost = Blogpost::makeRestored($id);
 $blogPost->save();
 ```
 
+If the model to be restored can't be found in the `deleted_models` table, `null` will be returned by `makeRestored`.
+
 ### Restoring without emitting events
 
 By default, the `Spatie\DeletedModels\Events\RestoringDeletedModelEvent` and `Spatie\DeletedModels\Events\DeletedModelEvent` will be dispatched when calling `restore` on a model.
 
-If you don't want these events to be dispatched, call `restoreQuietly`
+If you don't want these events to be dispatched, call `restoreQuietly`.
 
 ```php
 BlogPost::restoreQuietly(); // no events will be dispatched
