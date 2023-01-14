@@ -43,13 +43,14 @@ trait KeepsDeletedModels
     {
         $hiddenAttributes = $this->getHidden();
 
-        $this->makeVisible($hiddenAttributes);
+        /*
+         * Avoid changing original instance
+         */
+        $cloned = clone $this;
 
-        $attributes = $this->toArray();
+        $cloned->makeVisible($hiddenAttributes);
 
-        $this->makeHidden($hiddenAttributes);
-
-        return $attributes;
+        return $cloned->toArray();
     }
 
     public function deleteWithoutKeeping()
