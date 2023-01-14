@@ -84,7 +84,7 @@ trait KeepsDeletedModels
 
     public static function restoreQuietly(mixed $key): Model
     {
-        return static::withoutEvents(fn() => static::restore($key));
+        return static::withoutEvents(fn () => static::restore($key));
     }
 
     public static function makeRestored(mixed $key): ?Model
