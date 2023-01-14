@@ -25,7 +25,7 @@ class DeletedModel extends Model
 
     public $guarded = [];
 
-    public function restore(): ?Model
+    public function restore(): Model
     {
         event(new RestoringDeletedModel($this));
 
