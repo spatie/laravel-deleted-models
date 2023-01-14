@@ -81,6 +81,23 @@ trait KeepsDeletedModels
         return $restoredModel;
     }
 
+    public static function makeRestored(mixed $key): ?Model
+    {
+        $deletedModel = self::findDeletedModelToRestore($key);
+
+        if (! $deletedModel) {
+            return null;
+        }
+
+        self::beforeRestoringModel($deletedModel);
+
+        $restoredModel = $deletedModel->makeRestoredModel();
+
+        self::afterRestoringModel($restoredModel, $deletedModel);
+
+        return $restoredModel;
+    }
+
     public static function beforeRestoringModel(DeletedModel $deletedModel): void
     {
     }

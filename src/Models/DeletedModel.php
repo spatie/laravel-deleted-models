@@ -29,14 +29,12 @@ class DeletedModel extends Model
     {
         event(new RestoringDeletedModel($this));
 
-        $modelClass = $this->getModelClass();
-
         try {
-            $restoredModel = $this->makeRestoredModel($modelClass);
+            $restoredModel = $this->makeRestoredModel();
 
             $this->beforeSavingRestoredModel();
 
-            $this->persistRestoredModel($restoredModel);
+            $this->saveRestoredModel($restoredModel);
 
             $this->afterSavingRestoredModel();
         } catch (Exception $exception) {
@@ -58,12 +56,10 @@ class DeletedModel extends Model
         return Relation::getMorphedModel($this->model) ?? $this->model;
     }
 
-    /**
-     * @param  class-string<Model>  $modelClass
-     * @return Model
-     */
-    protected function makeRestoredModel(string $modelClass): mixed
+    public function makeRestoredModel(): Model
     {
+        $modelClass = $this->getModelClass();
+
         $model = (new $modelClass)->fill($this->values);
 
         return $model;
@@ -73,7 +69,7 @@ class DeletedModel extends Model
     {
     }
 
-    protected function persistRestoredModel(Model $model): void
+    protected function saveRestoredModel(Model $model): void
     {
         $model->save();
     }

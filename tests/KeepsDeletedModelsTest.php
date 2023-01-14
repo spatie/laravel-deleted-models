@@ -18,6 +18,9 @@ beforeEach(function () {
     ];
 
     $this->model = TestModel::factory()->create($this->attributes);
+    ]);
+
+    $this->modelId = $this->model->id;
 });
 
 it('will copy a deleted model to the deleted models table', function () {
@@ -130,14 +133,12 @@ it('will throw an exception when trying to restore a not-existing model', functi
 })->throws(NoModelFoundToRestore::class);
 
 it('will throw an exception when the model cannot be restored', function () {
-    $id = $this->model->id;
-
     $this->model->delete();
 
     // sneakily change the deleted model so it cannot be restored
     DeletedModel::first()->update(['values' => []]);
 
-    TestModel::restore($id);
+    TestModel::restore($this->modelId);
 })->throws(CouldNotRestoreModel::class);
 
 it('will save hidden attributes as well', function () {
@@ -150,4 +151,14 @@ it('will save hidden attributes as well', function () {
     expect($deletedModel->values)
         ->id->toBe(1)
         ->secret->toBe('hash');
+});
+      
+it('can make a restored model without saving it', function () {
+    $this->model->delete();
+
+    $testModel = TestModel::makeRestored($this->modelId);
+
+    expect($testModel)->toBeInstanceOf(TestModel::class);
+    expect($testModel->name)->toBe('John Doe');
+    expect($testModel->exists)->toBe(false);
 });
