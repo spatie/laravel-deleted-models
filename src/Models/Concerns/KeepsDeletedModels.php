@@ -50,7 +50,7 @@ trait KeepsDeletedModels
 
         $cloned->makeVisible($hiddenAttributes);
 
-        return $cloned->toArray();
+        return $cloned->attributesToArray();
     }
 
     public function deleteWithoutKeeping()

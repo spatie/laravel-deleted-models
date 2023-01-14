@@ -18,4 +18,9 @@ class TestModel extends Model
 
     use KeepsDeletedModels;
     use HasFactory;
+
+    public function relatedModel()
+    {
+        return $this->hasOne(RelatedModel::class);
+    }
 }
