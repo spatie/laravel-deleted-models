@@ -14,11 +14,10 @@ beforeEach(function () {
 
     $this->attributes = [
         'name' => 'John Doe',
-        'secret' => 'hash',
+        'secret' => 'secret-value',
     ];
 
     $this->model = TestModel::factory()->create($this->attributes);
-    ]);
 
     $this->modelId = $this->model->id;
 });
@@ -71,7 +70,7 @@ it('can restore a deleted model', function () {
     expect($restoredModel)
         ->id->toBe(1)
         ->name->toBe('John Doe')
-        ->secret->toBe('hash')
+        ->secret->toBe('secret-value')
         ->created_at->format('Y-m-d H:i:s')->toBe('2023-01-01 00:00:00')
         ->updated_at->format('Y-m-d H:i:s')->toBe('2023-01-01 00:00:00');
 });
@@ -150,9 +149,12 @@ it('will save hidden attributes as well', function () {
 
     expect($deletedModel->values)
         ->id->toBe(1)
-        ->secret->toBe('hash');
+        ->secret->toBe('secret-value');
+
+    // hidden attributes will not appear on the original model instance
+    expect($this->model->toArray())->not()->toHaveKey('secret');
 });
-      
+
 it('can make a restored model without saving it', function () {
     $this->model->delete();
 
