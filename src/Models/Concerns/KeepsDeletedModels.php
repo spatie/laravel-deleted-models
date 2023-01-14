@@ -41,7 +41,15 @@ trait KeepsDeletedModels
 
     public function attributesToKeep(): array
     {
-        return $this->toArray();
+        $hiddenAttributes = $this->getHidden();
+
+        $this->makeVisible($hiddenAttributes);
+
+        $attributes = $this->toArray();
+
+        $this->makeHidden($hiddenAttributes);
+
+        return $attributes;
     }
 
     public function deleteWithoutKeeping()
