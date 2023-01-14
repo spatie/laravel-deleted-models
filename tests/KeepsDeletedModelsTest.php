@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
 use Spatie\DeletedModels\Exceptions\NoModelFoundToRestore;
 use Spatie\DeletedModels\Models\DeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
@@ -123,3 +124,14 @@ it('can determine the attributes to be stored', function () {
 it('will throw an exception when trying to restore a not-existing model', function() {
     TestModel::restore('non-existing');
 })->throws(NoModelFoundToRestore::class);
+
+it('will throw an exception when the model cannot be restored', function() {
+    $id = $this->model->id;
+
+    $this->model->delete();
+
+     // sneakily change the deleted model so it cannot be restored
+    DeletedModel::first()->update(['values' => []]);
+
+    TestModel::restore($id);
+})->throws(CouldNotRestoreModel::class);
