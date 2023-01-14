@@ -4,7 +4,7 @@ namespace Spatie\DeletedModels\Events;
 
 use Spatie\DeletedModels\Models\DeletedModel;
 
-class RestoringDeletedModel
+class RestoringDeletedModelEvent
 {
     public function __construct(public DeletedModel $model)
     {

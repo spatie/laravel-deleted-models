@@ -82,9 +82,20 @@ trait KeepsDeletedModels
         return $restoredModel;
     }
 
+    public static function restoreQuietly(mixed $key): Model
+    {
+        return static::withoutEvents(fn() => static::restore($key));
+    }
+
     public static function makeRestored(mixed $key): ?Model
     {
-        $deletedModel = self::findDeletedModelToRestore($key);
+        $deletedModel = null;
+
+        try {
+            $deletedModel = self::findDeletedModelToRestore($key);
+        } catch (NoModelFoundToRestore) {
+            // do nothing
+        }
 
         if (! $deletedModel) {
             return null;

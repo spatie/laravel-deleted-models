@@ -116,6 +116,16 @@ $blogPost = Blogpost::makeRestored($id);
 $blogPost->save();
 ```
 
+### Restoring without emitting events
+
+By default, the `Spatie\DeletedModels\Events\RestoringDeletedModelEvent` and `Spatie\DeletedModels\Events\DeletedModelEvent` will be dispatched when calling `restore` on a model.
+
+If you don't want these events to be dispatched, call `restoreQuietly`
+
+```php
+BlogPost::restoreQuietly(); // no events will be dispatched
+```
+
 ### Customizing the restore process
 
 If you need to run some logic to before and after restoring a model, you can implement `beforeRestoringModel` and `afterRestoringModel` on your model.
