@@ -104,6 +104,18 @@ To restore a previous model you can call `restore` and pass the id.
 $blogPost = Blogpost::restore(5); // $blogPost will be restored and returned
 ```
 
+### Restoring without saving
+
+To restore in memory, without actually saving it, you can call `makeRestored`.
+Keep in mind that calling this method will also remove the record in the `deleted_models_table`.
+
+```php
+// $blogPost will be return, but it is not saved in the db yet
+$blogPost = Blogpost::makeRestored($id); 
+
+$blogPost->save();
+```
+
 ### Customizing the restore process
 
 If you need to run some logic to before and after restoring a model, you can implement `beforeRestoringModel` and `afterRestoringModel` on your model.
