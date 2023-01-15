@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-deleted-models` will be documented in this file.
 
+## 0.0.4 - 2023-01-15
+
+### What's Changed
+
+- Remove relationships from deleted object by @stfndamjanovic in https://github.com/spatie/laravel-deleted-models/pull/5
+- Custom deleted model class by @stfndamjanovic in https://github.com/spatie/laravel-deleted-models/pull/6
+- Revert guarded fields to original table as well by @stfndamjanovic in https://github.com/spatie/laravel-deleted-models/pull/7
+
+**Full Changelog**: https://github.com/spatie/laravel-deleted-models/compare/0.0.3...0.0.4
+
 ## 0.0.3 - 2023-01-14
 
 ### What's Changed
