@@ -8,7 +8,10 @@ use Spatie\DeletedModels\Models\Concerns\KeepsDeletedModels;
 
 class TestModel extends Model
 {
-    public $guarded = [];
+    public $fillable = [
+        'name',
+        'secret',
+    ];
 
     public $hidden = [
         'secret',
