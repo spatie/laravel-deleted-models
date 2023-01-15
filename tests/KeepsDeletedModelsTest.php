@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
 use Spatie\DeletedModels\Exceptions\NoModelFoundToRestore;
 use Spatie\DeletedModels\Models\DeletedModel;
+use Spatie\DeletedModels\Tests\TestSupport\Models\CustomDeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\RelatedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
 use function Spatie\PestPluginTestTime\testTime;
@@ -186,4 +187,16 @@ it('will not save relationship objects', function () {
     $deletedModel = DeletedModel::first();
 
     expect($deletedModel->values)->not()->toHaveKey('related_model');
+});
+
+it('can use custom deleted model class', function () {
+    config(['deleted-models.model' => CustomDeletedModel::class]);
+
+    $this->model->delete();
+
+    $deletedModel = TestModel::deletedModels()
+        ->where('key', $this->model->id)
+        ->first();
+
+    expect($deletedModel)->toBeInstanceOf(CustomDeletedModel::class);
 });
