@@ -65,9 +65,7 @@ class DeletedModel extends Model
     {
         $modelClass = $this->getModelClass();
 
-        $model = (new $modelClass)->fill($this->values);
-
-        return $model;
+        return (new $modelClass)->forceFill($this->values);
     }
 
     public function beforeSavingRestoredModel(): void
