@@ -23,10 +23,7 @@ trait KeepsDeletedModels
                 return;
             }
 
-            /** @var class-string<DeletedModel> $deletedModelClass */
-            $deletedModelClass = config('deleted-models.model');
-
-            $deletedModelClass::create([
+            static::getDeletedModelClassName()::create([
                 'key' => $model->getKey(),
                 'model' => $model->getMorphClass(),
                 'values' => $model->attributesToKeep(),
@@ -66,7 +63,7 @@ trait KeepsDeletedModels
     {
         $model = (new self)->getMorphClass();
 
-        return DeletedModel::query()->where('model', $model);
+        return static::getDeletedModelClassName()::query()->where('model', $model);
     }
 
     public static function restore(mixed $key): Model
@@ -118,6 +115,11 @@ trait KeepsDeletedModels
         Model $restoredMode,
         DeletedModel $deletedModel
     ): void {
+    }
+
+    protected static function getDeletedModelClassName()
+    {
+        return config('deleted-models.model');
     }
 
     protected static function findDeletedModelToRestore(mixed $key): DeletedModel
