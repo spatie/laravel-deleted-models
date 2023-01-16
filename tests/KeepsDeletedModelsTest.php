@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Database\Eloquent\Relations\Relation;
+use function Pest\Laravel\artisan;
 use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
 use Spatie\DeletedModels\Exceptions\NoModelFoundToRestore;
 use Spatie\DeletedModels\Models\DeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\CustomDeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\RelatedModel;
+use Spatie\DeletedModels\Tests\TestSupport\Models\TestDeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
 use function Spatie\PestPluginTestTime\testTime;
 
@@ -211,4 +213,18 @@ it('accepts a closure to customize the restored model', function () {
     $restoredModel = TestModel::restore($this->modelId, $customizeRestore);
 
     expect($restoredModel->name)->toBe('overridden name');
+});
+
+it('can remove old records', function () {
+    TestDeletedModel::factory()->count(3)->create([
+        'created_at' => now()->subDays(366),
+    ]);
+
+    TestDeletedModel::factory()->count(2)->create([
+        'created_at' => now()->subDays(364),
+    ]);
+
+    artisan('model:prune', ['--model' => [DeletedModel::class]])->assertSuccessful();
+
+    expect(DeletedModel::count())->toBe(2);
 });

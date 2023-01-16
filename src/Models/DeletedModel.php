@@ -2,6 +2,7 @@
 
 namespace Spatie\DeletedModels\Models;
 
+use Carbon\Carbon;
 use Closure;
 use Exception;
 use Illuminate\Database\Eloquent\MassPrunable;
@@ -108,8 +109,10 @@ class DeletedModel extends Model
         return Arr::get($this->values, $key);
     }
 
-    protected function massPrunable()
+    protected function prunable()
     {
-        return static::where('created_at', '<=', config('deleted-models.prune_after_days'));
+        $days = config('deleted-models.prune_after_days');
+
+        return static::where('created_at', '<=', Carbon::now()->subDays($days)->format('Y-m-d H:i:s'));
     }
 }
