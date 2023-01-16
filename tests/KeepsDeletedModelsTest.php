@@ -201,10 +201,10 @@ it('can use custom deleted model class', function () {
     expect($deletedModel)->toBeInstanceOf(CustomDeletedModel::class);
 });
 
-it('accepts a closure to customize the restored model', function() {
+it('accepts a closure to customize the restored model', function () {
     $this->model->delete();
 
-    $customizeRestore = function(TestModel $testModel, DeletedModel $deletedModel) {
+    $customizeRestore = function (TestModel $testModel, DeletedModel $deletedModel) {
         $testModel->name = 'overridden name';
     };
 
