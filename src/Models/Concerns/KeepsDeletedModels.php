@@ -2,6 +2,7 @@
 
 namespace Spatie\DeletedModels\Models\Concerns;
 
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\DeletedModels\Exceptions\NoModelFoundToRestore;
@@ -66,13 +67,13 @@ trait KeepsDeletedModels
         return static::getDeletedModelClassName()::query()->where('model', $model);
     }
 
-    public static function restore(mixed $key): Model
+    public static function restore(mixed $key, Closure $beforeSaving = null): Model
     {
         $deletedModel = self::findDeletedModelToRestore($key);
 
         self::beforeRestoringModel($deletedModel);
 
-        $restoredModel = $deletedModel->restore();
+        $restoredModel = $deletedModel->restore($beforeSaving);
 
         self::afterRestoringModel($restoredModel, $deletedModel);
 

@@ -132,6 +132,18 @@ BlogPost::restoreQuietly(); // no events will be dispatched
 
 ### Customizing the restore process
 
+#### Using closures passed to `restore`
+
+The `restore` function accepts a callable as the second argument. The `beforeSaving` callable will be executed when the restored model was created in memory, but before saving it in the db.
+
+```php
+BlogPost::restore(5, function(BlogPost $post, DeletedModel $deletedModel) {
+    $post->title = "{$post->title} (restored)";
+})
+```
+
+#### Using methods on the model
+
 If you need to run some logic to before and after restoring a model, you can implement `beforeRestoringModel` and `afterRestoringModel` on your model.
 
 ```php

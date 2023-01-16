@@ -2,6 +2,7 @@
 
 namespace Spatie\DeletedModels\Models;
 
+use Closure;
 use Exception;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +28,7 @@ class DeletedModel extends Model
 
     public $table = 'deleted_models';
 
-    public function restore(): Model
+    public function restore(Closure $beforeSaving = null): Model
     {
         event(new RestoringDeletedModelEvent($this));
 
@@ -35,6 +36,10 @@ class DeletedModel extends Model
             $restoredModel = $this->makeRestoredModel();
 
             $this->beforeSavingRestoredModel();
+
+            if ($beforeSaving) {
+                $beforeSaving($restoredModel, $this);
+            }
 
             $this->saveRestoredModel($restoredModel);
 
