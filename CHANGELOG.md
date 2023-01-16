@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-deleted-models` will be documented in this file.
 
+## 1.0.0 - 2023-01-16
+
+- initial release
+
 ## 0.0.5 - 2023-01-16
 
 ### What's Changed
