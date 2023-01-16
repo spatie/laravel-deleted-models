@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Spatie\DeletedModels\Events\DeletedModelRestoredEvent;
 use Spatie\DeletedModels\Events\RestoringDeletedModelEvent;
 use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
@@ -30,6 +31,8 @@ class DeletedModel extends Model
 
     public function restore(Closure $beforeSaving = null): Model
     {
+        DB::beginTransaction();
+
         event(new RestoringDeletedModelEvent($this));
 
         try {
@@ -44,15 +47,17 @@ class DeletedModel extends Model
             $this->saveRestoredModel($restoredModel);
 
             $this->afterSavingRestoredModel();
+
+            event(new DeletedModelRestoredEvent($this, $restoredModel));
+
+            $this->deleteDeletedModel();
+
+            DB::commit();
         } catch (Exception $exception) {
+            DB::rollBack();
+
             $this->handleExceptionDuringRestore($exception);
-
-            throw $exception;
         }
-
-        $this->deleteDeletedModel();
-
-        event(new DeletedModelRestoredEvent($this, $restoredModel));
 
         return $restoredModel;
     }
