@@ -19,7 +19,7 @@ To restore a previous model you can call `restore` and pass the id.
 $blogPost = BlogPost::restore(5); // $blogPost will be restored and returned
 ```
 
-This way of preserving information when deleting can be seen as an alternative to soft deletes. You can read more on the trade-offs [in this blog post](https://brandur.org/fragments/deleted-record-insert) and [this one](https://brandur.org/soft-deletion).
+This way of preserving information when deleting can be seen as an alternative to soft deletes. You can read more on the trade-offs [in this blog post](https://freek.dev/2416-a-package-to-automatically-copy-deleted-records-to-a-separate-table).
 
 ## Support us
 
@@ -239,6 +239,10 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
+
+This package was inspired by these two blog posts:
+- [Easy, alternative soft deletion](https://brandur.org/fragments/deleted-record-insert) 
+- [this one](Soft Deletion Probably Isn't Worth It).
 
 ## License
 
