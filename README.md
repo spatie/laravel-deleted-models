@@ -16,7 +16,7 @@ $blogPost->delete(); // values will be copied to the `deleted_models` table.
 To restore a previous model you can call `restore` and pass the id.
 
 ```php
-$blogPost = Blogpost::restore(5); // $blogPost will be restored and returned
+$blogPost = BlogPost::restore(5); // $blogPost will be restored and returned
 ```
 
 This way of preserving information when deleting can be seen as an alternative to soft deletes. You can read more on the trade-offs [in this blog post](https://brandur.org/fragments/deleted-record-insert) and [this one](https://brandur.org/soft-deletion).
@@ -101,7 +101,7 @@ $blogPost->delete(); // values will be copied to the `deleted_models` table.
 To restore a previous model you can call `restore` and pass the id.
 
 ```php
-$blogPost = Blogpost::restore(5); // $blogPost will be restored and returned
+$blogPost = BlogPost::restore(5); // $blogPost will be restored and returned
 ```
 
 If the model to be restored can't be found in the `deleted_models` table, a `Spatie\DeletedModels\Exceptions\NoModelFoundToRestore` exception will be thrown.
