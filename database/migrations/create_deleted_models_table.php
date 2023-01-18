@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('deleted_models', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('key');
+            $table->string('key', 40);
             $table->string('model');
             $table->json('values');
 
