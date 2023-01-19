@@ -34,7 +34,7 @@ it('will copy a deleted model to the deleted models table', function () {
     $deletedModel = DeletedModel::first();
 
     expect($deletedModel)
-        ->key->toBe(1)
+        ->key->toBe('1')
         ->model->toBe(TestModel::class);
 
     expect($deletedModel->values)
