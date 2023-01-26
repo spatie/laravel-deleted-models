@@ -55,8 +55,6 @@ trait KeepsDeletedModels
     {
         $this->shouldKeep = false;
 
-        $this->delete();
-
         return tap($this->delete(), fn () => $this->shouldKeep = true);
     }
 
