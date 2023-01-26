@@ -36,8 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\DeletedModels\\": "src",
-            "Spatie\\DeletedModels\\Database\\Factories\\": "database/factories"
+            "Spatie\\DeletedModels\\": "src"
         }
     },
     "autoload-dev": {
