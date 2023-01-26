@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-deleted-models` will be documented in this file.
 
+## 1.0.4 - 2023-01-26
+
+### What's Changed
+
+- Minor changes by @stfndamjanovic in https://github.com/spatie/laravel-deleted-models/pull/14
+
+**Full Changelog**: https://github.com/spatie/laravel-deleted-models/compare/1.0.3...1.0.4
+
 ## 1.0.3 - 2023-01-19
 
 ### What's Changed
