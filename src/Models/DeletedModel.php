@@ -28,7 +28,10 @@ class DeletedModel extends Model
 
     public $guarded = [];
 
-    public $table = 'deleted_models';
+    public function getTable()
+    {
+        return config('deleted-models.table_name', 'deleted_models');
+    }
 
     public function restore(Closure $beforeSaving = null): Model
     {

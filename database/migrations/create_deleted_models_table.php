@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('deleted_models', function (Blueprint $table) {
+        Schema::create(config('deleted-models.table_name', 'deleted_models'), function (Blueprint $table) {
             $table->id();
 
             $table->string('key', 40);
