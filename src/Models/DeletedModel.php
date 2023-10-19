@@ -45,6 +45,8 @@ class DeletedModel extends Model
                 $beforeSaving($restoredModel, $this);
             }
 
+            $this->enableIdentityInsert($this->getModelClass());
+            
             $this->saveRestoredModel($restoredModel);
 
             $this->afterSavingRestoredModel();
@@ -52,6 +54,8 @@ class DeletedModel extends Model
             event(new DeletedModelRestoredEvent($this, $restoredModel));
 
             $this->deleteDeletedModel();
+            
+            $this->disableIdentityInsert($this->getModelClass());
 
             DB::commit();
         } catch (Exception $exception) {
@@ -61,6 +65,22 @@ class DeletedModel extends Model
         }
 
         return $restoredModel;
+    }
+
+    protected function enableIdentityInsert(string $modelClass)
+    {
+        if (config('database.default') === 'sqlsrv') {
+            $tableName = (new $modelClass)->getTable();
+            DB::unprepared("SET IDENTITY_INSERT $tableName ON");
+        }
+    }
+
+    protected function disableIdentityInsert(string $modelClass)
+    {
+        if (config('database.default') === 'sqlsrv') {
+            $tableName = (new $modelClass)->getTable();
+            DB::unprepared("SET IDENTITY_INSERT $tableName OFF");
+        }
     }
 
     public function restoreQuietly(): Model
