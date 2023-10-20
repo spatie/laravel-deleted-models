@@ -30,6 +30,12 @@ class DeletedModel extends Model
 
     public $table = 'deleted_models';
 
+    public $enableIdentityInsert = false;
+
+    const IDENTITY_INSERT_ON = 'ON';
+
+    const IDENTITY_INSERT_OFF = 'OFF';
+
     public function restore(Closure $beforeSaving = null): Model
     {
         DB::beginTransaction();
@@ -45,7 +51,9 @@ class DeletedModel extends Model
                 $beforeSaving($restoredModel, $this);
             }
 
-            $this->enableIdentityInsert($this->getModelClass());
+            if ($this->enableIdentityInsert) {
+                $this->setIdentityInsert($this->getModelClass(), self::IDENTITY_INSERT_ON);
+            }
             
             $this->saveRestoredModel($restoredModel);
 
@@ -55,7 +63,9 @@ class DeletedModel extends Model
 
             $this->deleteDeletedModel();
             
-            $this->disableIdentityInsert($this->getModelClass());
+            if ($this->enableIdentityInsert) {
+                $this->setIdentityInsert($this->getModelClass(), self::IDENTITY_INSERT_OFF);
+            }
 
             DB::commit();
         } catch (Exception $exception) {
@@ -67,20 +77,10 @@ class DeletedModel extends Model
         return $restoredModel;
     }
 
-    protected function enableIdentityInsert(string $modelClass)
+    protected function setIdentityInsert(string $modelClass, $identityInsertState)
     {
-        if (config('database.default') === 'sqlsrv') {
-            $tableName = (new $modelClass)->getTable();
-            DB::unprepared("SET IDENTITY_INSERT $tableName ON");
-        }
-    }
-
-    protected function disableIdentityInsert(string $modelClass)
-    {
-        if (config('database.default') === 'sqlsrv') {
-            $tableName = (new $modelClass)->getTable();
-            DB::unprepared("SET IDENTITY_INSERT $tableName OFF");
-        }
+        $tableName = (new $modelClass)->getTable();
+        DB::unprepared("SET IDENTITY_INSERT $tableName $identityInsertState");
     }
 
     public function restoreQuietly(): Model
