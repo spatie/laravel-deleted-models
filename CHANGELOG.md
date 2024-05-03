@@ -2,6 +2,32 @@
 
 All notable changes to `laravel-deleted-models` will be documented in this file.
 
+## 1.0.5 - 2024-05-03
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 1.3.5 to 1.3.6 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/15
+* Bump dependabot/fetch-metadata from 1.3.6 to 1.4.0 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/19
+* Bump dependabot/fetch-metadata from 1.4.0 to 1.5.0 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/20
+* Bump dependabot/fetch-metadata from 1.5.0 to 1.5.1 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/21
+* Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/23
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/25
+* Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/24
+* Bump aglipanci/laravel-pint-action from 1.0.0 to 2.3.0 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/22
+* Bump aglipanci/laravel-pint-action from 2.3.0 to 2.3.1 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/27
+* Bump ramsey/composer-install from 2 to 3 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/29
+* Bump dependabot/fetch-metadata from 1.6.0 to 2.0.0 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/30
+* Bump aglipanci/laravel-pint-action from 2.3.1 to 2.4 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/31
+* Bump dependabot/fetch-metadata from 2.0.0 to 2.1.0 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/32
+* Laravel 11.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-deleted-models/pull/28
+
+### New Contributors
+
+* @dependabot made their first contribution in https://github.com/spatie/laravel-deleted-models/pull/15
+* @laravel-shift made their first contribution in https://github.com/spatie/laravel-deleted-models/pull/28
+
+**Full Changelog**: https://github.com/spatie/laravel-deleted-models/compare/1.0.4...1.0.5
+
 ## 1.0.4 - 2023-01-26
 
 ### What's Changed
