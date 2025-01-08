@@ -65,7 +65,7 @@ trait KeepsDeletedModels
         return static::getDeletedModelClassName()::query()->where('model', $model);
     }
 
-    public static function restore(mixed $key, Closure $beforeSaving = null): Model
+    public static function restore(mixed $key, ?Closure $beforeSaving = null): Model
     {
         $deletedModel = self::findDeletedModelToRestore($key);
 
