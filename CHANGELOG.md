@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-deleted-models` will be documented in this file.
 
+## 1.1.0 - 2025-01-09
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.1.0 to 2.2.0 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/33
+* Update KeepsDeletedModels trait by @santos-sabanari in https://github.com/spatie/laravel-deleted-models/pull/34
+
+### New Contributors
+
+* @santos-sabanari made their first contribution in https://github.com/spatie/laravel-deleted-models/pull/34
+
+**Full Changelog**: https://github.com/spatie/laravel-deleted-models/compare/1.0.5...1.1.0
+
 ## 1.0.5 - 2024-05-03
 
 ### What's Changed
