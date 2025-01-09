@@ -106,15 +106,12 @@ trait KeepsDeletedModels
         return $restoredModel;
     }
 
-    public static function beforeRestoringModel(DeletedModel $deletedModel): void
-    {
-    }
+    public static function beforeRestoringModel(DeletedModel $deletedModel): void {}
 
     public static function afterRestoringModel(
         Model $restoredMode,
         DeletedModel $deletedModel
-    ): void {
-    }
+    ): void {}
 
     protected static function getDeletedModelClassName()
     {

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Eloquent\Relations\Relation;
-use function Pest\Laravel\artisan;
 use Spatie\DeletedModels\Exceptions\CouldNotRestoreModel;
 use Spatie\DeletedModels\Exceptions\NoModelFoundToRestore;
 use Spatie\DeletedModels\Models\DeletedModel;
@@ -9,6 +8,8 @@ use Spatie\DeletedModels\Tests\TestSupport\Models\CustomDeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\RelatedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\TestDeletedModel;
 use Spatie\DeletedModels\Tests\TestSupport\Models\TestModel;
+
+use function Pest\Laravel\artisan;
 use function Spatie\PestPluginTestTime\testTime;
 
 beforeEach(function () {

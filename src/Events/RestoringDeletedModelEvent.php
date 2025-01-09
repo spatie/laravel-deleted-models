@@ -6,7 +6,5 @@ use Spatie\DeletedModels\Models\DeletedModel;
 
 class RestoringDeletedModelEvent
 {
-    public function __construct(public DeletedModel $model)
-    {
-    }
+    public function __construct(public DeletedModel $model) {}
 }

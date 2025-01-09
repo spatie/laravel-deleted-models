@@ -30,7 +30,7 @@ class DeletedModel extends Model
 
     public $table = 'deleted_models';
 
-    public function restore(Closure $beforeSaving = null): Model
+    public function restore(?Closure $beforeSaving = null): Model
     {
         DB::beginTransaction();
 
@@ -81,18 +81,14 @@ class DeletedModel extends Model
         return (new $modelClass)->forceFill($this->values);
     }
 
-    public function beforeSavingRestoredModel(): void
-    {
-    }
+    public function beforeSavingRestoredModel(): void {}
 
     protected function saveRestoredModel(Model $model): void
     {
         $model->save();
     }
 
-    public function afterSavingRestoredModel(): void
-    {
-    }
+    public function afterSavingRestoredModel(): void {}
 
     protected function deleteDeletedModel(): void
     {
@@ -104,7 +100,7 @@ class DeletedModel extends Model
         throw CouldNotRestoreModel::make($this, $exception);
     }
 
-    public function value(string $key = null): mixed
+    public function value(?string $key = null): mixed
     {
         return Arr::get($this->values, $key);
     }

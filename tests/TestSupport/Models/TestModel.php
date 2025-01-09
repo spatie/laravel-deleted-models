@@ -19,8 +19,8 @@ class TestModel extends Model
 
     public $table = 'test_models';
 
-    use KeepsDeletedModels;
     use HasFactory;
+    use KeepsDeletedModels;
 
     public function relatedModel()
     {
