@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-deleted-models` will be documented in this file.
 
+## 1.1.1 - 2025-02-17
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/35
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/spatie/laravel-deleted-models/pull/39
+
+**Full Changelog**: https://github.com/spatie/laravel-deleted-models/compare/1.1.0...1.1.1
+
 ## 1.1.0 - 2025-01-09
 
 ### What's Changed
