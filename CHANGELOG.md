@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-deleted-models` will be documented in this file.
 
+## 1.1.2 - 2025-02-19
+
+### What's Changed
+
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-deleted-models/pull/42
+
+**Full Changelog**: https://github.com/spatie/laravel-deleted-models/compare/1.1.1...1.1.2
+
 ## 1.1.1 - 2025-02-17
 
 ### What's Changed
