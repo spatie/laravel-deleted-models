@@ -15,20 +15,22 @@ trait KeepsDeletedModels
 
     public static function bootKeepsDeletedModels(): void
     {
-        static::deleted(function (Model $model) {
-            if (! $model->shouldKeep) {
-                return;
-            }
+        static::whenBooted(function () {
+            static::deleted(function (Model $model) {
+                if (! $model->shouldKeep) {
+                    return;
+                }
 
-            if (! $model->shouldKeep()) {
-                return;
-            }
+                if (! $model->shouldKeep()) {
+                    return;
+                }
 
-            static::getDeletedModelClassName()::create([
-                'key' => $model->getKey(),
-                'model' => $model->getMorphClass(),
-                'values' => $model->attributesToKeep(),
-            ]);
+                static::getDeletedModelClassName()::create([
+                    'key' => $model->getKey(),
+                    'model' => $model->getMorphClass(),
+                    'values' => $model->attributesToKeep(),
+                ]);
+            });
         });
     }
 
