@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-deleted-models` will be documented in this file.
 
+## 1.2.0 - 2026-03-06
+
+### What's Changed
+
+- Laravel 13.x Compatibility
+- Drop support for PHP < 8.4 and Laravel < 12
+- Update to Pest 4
+- Wrap model boot observer in whenBooted callback (Laravel 13 requirement)
+
 ## 1.1.2 - 2025-02-19
 
 ### What's Changed
