@@ -23,7 +23,7 @@ This way of preserving information when deleting can be seen as an alternative t
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-deleted-models.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-deleted-models)
+[<img src="https://spatie.be/github-ad-image/laravel-deleted-models.jpg" width="419px" />](https://spatie.be/github-ad-click/laravel-deleted-models)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
