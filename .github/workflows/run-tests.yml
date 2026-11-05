@@ -18,6 +18,10 @@ jobs:
         php: [8.4, 8.5, 8.6]
         laravel: ['12.*', '13.*']
         stability: [prefer-stable]
+        exclude:
+          # PHP 8.6 needs Pest 5, whose Symfony Process 8 conflicts with Testbench 10.
+          - php: 8.6
+            laravel: 12.*
         include:
           - laravel: 12.*
             testbench: 10.*
